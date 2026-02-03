@@ -1,0 +1,11 @@
+base_case.json,A3,1,15.48,15.48
+test_cases/test_case_1.json,A1,4,81.33,20.33
+test_cases/test_case_2.json,A2,3,73.43,24.48
+test_cases/test_case_3.json,A3,3,67.6,22.53
+test_cases/test_case_4.json,A3,5,109.47,21.89
+test_cases/test_case_5.json,A3,5,118.66,23.73
+test_cases/test_case_6.json,A3,4,92.5,23.12
+test_cases/test_case_7.json,A3,6,112.4,18.73
+test_cases/test_case_8.json,A_New,2,23.75,11.87
+test_cases/test_case_9.json,A_New,2,40.31,20.15
+test_cases/test_case_10.json,A4,6,84.91,14.15

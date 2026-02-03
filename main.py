@@ -1,4 +1,7 @@
 import json
+import random
+import csv
+import os
 
 def get_json_data(path):
     try:
@@ -54,6 +57,21 @@ def update_agent_distance(data, id, new_location):
         
 
 
+def save_top_agent_csv(agent_id, stats, report_name, filename="top_performers.csv"):
+    file_exists = os.path.isfile(filename)
+    with open(filename, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        if not file_exists:
+            writer.writerow(["Report", "Agent ID", "Packages Delivered", "Total Distance", "Efficiency"])
+        writer.writerow([
+            report_name,
+            agent_id, 
+            stats["packages_delivered"], 
+            stats["total_distance"], 
+            stats["efficiency"]
+        ])
+
+
 file_paths = [
     "base_case.json",
     "test_cases/test_case_1.json",
@@ -70,14 +88,29 @@ file_paths = [
 ]
 
 
-def generate_report(data):
+def generate_report(data, report_name="Unknown"):
     agent_stat = get_agent_stat(data)
-    for package in data["packages"]:
+    
+    total_packages = len(data["packages"])
+    print(f"Processing {total_packages} packages...")
+
+    for i, package in enumerate(data["packages"]):
+        # Simulating mid-day agent join (at 50% progress)
+        if i == total_packages // 2:
+            print("EVENT: New Agent 'A_New' joined the fleet at [50, 50]!")
+            data["agents"]["A_New"] = [50, 50]
+            agent_stat["A_New"] = {
+                "packages_delivered": 0, 
+                "total_distance": 0.0,
+                "efficiency": 0.0
+            }
+
         w_id = package.get("warehouse_id") or package.get("warehouse")
         w_house = get_warehouse(data, w_id)
         if w_house is None:
              print(f"Error: Warehouse {w_id} not found.")
              continue
+        
         near_by_agents = get_nearby_agents(w_house, data)
         nearest_agent = near_by_agents[0]
 
@@ -86,7 +119,9 @@ def generate_report(data):
         dist_btw_agent_and_w_house = nearest_agent[0]
         dist_btw_ware_house_to_des = calculate_distance(w_house, package["destination"])
 
-        total_trip_distance = dist_btw_agent_and_w_house + dist_btw_ware_house_to_des
+
+        delay_factor = random.uniform(1.0, 1.2) # Random Delivery Delay (0% to 20% extra distance/time)
+        total_trip_distance = (dist_btw_agent_and_w_house + dist_btw_ware_house_to_des) * delay_factor
 
         agent_stat[agent_id]["total_distance"] += total_trip_distance
         agent_stat[agent_id]["packages_delivered"] += 1
@@ -108,21 +143,24 @@ def generate_report(data):
                 best_agent = agent_id
             
     
-    print(f"Best Agent: {best_agent}")
-    print(json.dumps(agent_stat, indent=4))
-
+    agent_stat["best_agent"] = best_agent
+    
+    report_path = "reports/" + report_name.replace("/", "_")
+    with open(report_path, "w") as f:
+        json.dump(agent_stat, f, indent=4)
+    
+    if best_agent:
+        save_top_agent_csv(best_agent, agent_stat[best_agent], report_name)
+    
 
 
 
 def generate_multiple_reports():
     for file_path in file_paths:
-        print(f"\n{'='*50}")
-        print(f"Report for: {file_path}")
-        print(f"{'='*50}")
         data = get_json_data(file_path)
         if data is None:
             continue
         clean_data = clean(data)
-        generate_report(clean_data)
+        generate_report(clean_data, report_name=file_path)
 
 generate_multiple_reports()
