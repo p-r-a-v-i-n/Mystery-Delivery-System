@@ -1,8 +1,8 @@
 {
     "A1": {
         "packages_delivered": 1,
-        "total_distance": 23.44,
-        "efficiency": 23.44
+        "total_distance": 21.92,
+        "efficiency": 21.92
     },
     "A2": {
         "packages_delivered": 0,
@@ -11,13 +11,13 @@
     },
     "A3": {
         "packages_delivered": 4,
-        "total_distance": 92.5,
-        "efficiency": 23.12
+        "total_distance": 86.84,
+        "efficiency": 21.71
     },
     "A4": {
         "packages_delivered": 4,
-        "total_distance": 106.56,
-        "efficiency": 26.64
+        "total_distance": 110.5,
+        "efficiency": 27.63
     },
     "A_New": {
         "packages_delivered": 0,

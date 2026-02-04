@@ -6,23 +6,23 @@
     },
     "A2": {
         "packages_delivered": 2,
-        "total_distance": 42.65,
-        "efficiency": 21.33
+        "total_distance": 39.9,
+        "efficiency": 19.95
     },
     "A3": {
         "packages_delivered": 2,
-        "total_distance": 80.57,
-        "efficiency": 40.29
+        "total_distance": 78.42,
+        "efficiency": 39.21
     },
     "A4": {
         "packages_delivered": 6,
-        "total_distance": 84.91,
-        "efficiency": 14.15
+        "total_distance": 85.15,
+        "efficiency": 14.19
     },
     "A_New": {
         "packages_delivered": 1,
-        "total_distance": 51.24,
-        "efficiency": 51.24
+        "total_distance": 55.52,
+        "efficiency": 55.52
     },
     "best_agent": "A4"
 }

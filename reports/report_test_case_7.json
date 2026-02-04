@@ -6,18 +6,18 @@
     },
     "A2": {
         "packages_delivered": 1,
-        "total_distance": 42.97,
-        "efficiency": 42.97
+        "total_distance": 40.45,
+        "efficiency": 40.45
     },
     "A3": {
         "packages_delivered": 6,
-        "total_distance": 112.4,
-        "efficiency": 18.73
+        "total_distance": 116.13,
+        "efficiency": 19.36
     },
     "A4": {
         "packages_delivered": 3,
-        "total_distance": 66.29,
-        "efficiency": 22.1
+        "total_distance": 68.93,
+        "efficiency": 22.98
     },
     "A_New": {
         "packages_delivered": 0,
