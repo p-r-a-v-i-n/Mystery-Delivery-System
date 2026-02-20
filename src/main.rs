@@ -7,20 +7,20 @@ use serde_json::Result;
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Warehouse {
     id : String,
-    location: Vec<i64>
+    location: [i64; 2]
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Agent {
     id: String,
-    location: Vec<i64>,
+    location: [i64; 2],
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Package {
     id: String,
     warehouse_id: String,
-    destination: Vec<i64>,
+    destination: [i64; 2],
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -71,7 +71,7 @@ fn calculate_distance(co_1: &[i64], co_2: &[i64]) -> f64 {
     (dx * dx + dy * dy).sqrt()
 }
 
-fn get_nearby_agents(location: &Vec<i64>, data: &Data) -> Vec<(f64, String)> {
+fn get_nearby_agents(location: &[i64; 2], data: &Data) -> Vec<(f64, String)> {
     let mut distances: Vec<(f64, String)> = data.agents
         .iter()
         .map(|agent| {
